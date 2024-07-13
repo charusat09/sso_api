@@ -41,7 +41,22 @@ Ensure you have the following environment variables set in your Docker environme
 ```
 
 ### Devise and Doorkeepe
-The application uses Devise for user authentication and Doorkeeper for OAuth2. The Doorkeeper configuration is located in config/initializers/doorkeeper.rb.
+The application uses Devise for user authentication and Doorkeeper for OAuth2. The Doorkeeper configuration is located in `config/initializers/doorkeeper.rb`.
+
+**Registering Your App in Doorkeeper**
+To register your application with Doorkeeper using Rails console:
+```bash
+   docker-compose run backend rails console
+   app = Doorkeeper::Application.create!(
+           name: 'Your App Name',
+           redirect_uri: 'https://your-app-redirect-url.com',
+           scopes: 'your_scopes'
+         )
+
+    puts "Client ID: #{app.uid}"
+    puts "Client Secret: #{app.secret}"
+```
+Replace 'Your App Name', 'https://your-app-redirect-url.com', and 'your_scopes' with your application's name, redirect URI, and desired scopes respectively.
 
 ## Running the Application
 Start the application using Docker Compose:
